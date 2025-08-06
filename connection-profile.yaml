@@ -1,0 +1,25 @@
+name: test-network-org1
+version: 1.0.0
+client:
+  organization: Org1
+  connection:
+    timeout:
+      peer:
+        endorser: '300'
+organizations:
+  Org1:
+    mspid: Org1MSP
+    peers:
+      - peer0.org1.example.com
+    certificateAuthorities:
+      - ca.org1.example.com
+peers:
+  peer0.org1.example.com:
+    url: grpcs://192.168.154.130:7051
+    tlsCACerts:
+      path: ./sdk/wallet/tls/peer0-org1-ca.crt
+certificateAuthorities:
+  ca.org1.example.com:
+    url: https://192.168.154.130:7054
+    tlsCACerts:
+      path: ./sdk/wallet/tls/ca-org1.pem

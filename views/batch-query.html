@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>产品追溯查询</title>
+  <link rel="stylesheet" href="/a/b/c/batch-query.css">
+</head>
+<body>
+<!-- 导航栏 -->
+<nav>
+  <a href="home.html" id="home">首页</a>
+  <a href="batch-query.html" id="batch-query">批次查询</a>
+  <a href="person.html" id="person">个人中心</a>
+  <a href="index.html" id="index">登录</a>
+  <a href="register.html" id="register">注册</a>
+</nav>
+
+<h1>中药材追溯查询</h1>
+<div class="container">
+  <!-- 批次查询 -->
+  <div class="form-group">
+    <h3>请输入批次号查询</h3>
+    <form id="traceForm">
+      <label for="batchNo">批次号：</label>
+      <input type="text" id="batchNo" placeholder="批次号" required>
+      <button type="submit">查询</button>
+    </form>
+  </div>
+</div>
+
+<!-- 查询结果容器 -->
+<div id="traceResult" class="hidden">
+  <h3>查询结果：</h3>
+  <pre id="herbalInfo"></pre>   <!-- 草药数据 -->
+  <pre id="goodsInfo"></pre>    <!-- 商品数据 -->
+</div>
+
+<script>
+  // 导航激活状态（不变）
+  const currentPath = window.location.pathname;
+  const navLinks = document.querySelectorAll("nav a");
+  navLinks.forEach(link => {
+    if (currentPath.includes(link.getAttribute("href"))) {
+      link.classList.add("active");
+    }
+  });
+
+  // 批次查询功能
+  document.getElementById("traceForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const batchNo = document.getElementById("batchNo").value;
+
+    // <-- 修改: 调用新的 /user/combinedTrace 接口
+    fetch(`/user/combinedTrace?batchNo=${batchNo}`)
+            .then(response => response.json())
+            .then(data => {
+              if (data.code === "20000") {
+                document.getElementById("traceResult").classList.remove("hidden");
+
+                // data.data.herbal, data.data.goods
+                const herbalData = data.data?.herbal || "暂无草药信息";
+                const goodsData  = data.data?.goods  || "暂无商品信息";
+
+                // 在 <pre> 标签中显示 JSON
+                document.getElementById("herbalInfo").innerText =
+                        "【草药链码信息】\n" + JSON.stringify(herbalData, null, 2);
+
+                document.getElementById("goodsInfo").innerText  =
+                        "【商品链码信息】\n" + JSON.stringify(goodsData, null, 2);
+
+              } else {
+                alert("查询失败：" + data.msg);
+              }
+            })
+            .catch(err => {
+              alert("查询时发生错误：" + err);
+            });
+  });
+</script>
+</body>
+</html>

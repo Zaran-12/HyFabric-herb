@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>农户管理界面</title>
+    <link rel="stylesheet" href="/a/b/c/records_farmer.css">
+</head>
+<body>
+<nav>
+  <a href="farmer_dashboard.html">上传批次</a>
+  <a href="records_farmer.html">查看记录</a>
+  <a href="person_farmer.html" id="person">个人中心</a>
+  <a href="index.html">登录</a>
+  <a href="register.html">注册</a>
+</nav>
+
+<h1>农户管理界面</h1>
+<!-- 查看上传记录 -->
+<div class="table-group">
+  <h2>查看上传记录</h2>
+  <table id="recordTable">
+    <thead>
+    <tr>
+      <th>批次号</th>
+      <th>中药材种类</th>
+      <th>种植时间</th>
+      <th>种植地点</th>
+      <th>物流信息</th>
+      <th>附加说明</th>
+      <th>状态</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 动态数据 -->
+    </tbody>
+  </table>
+</div>
+<script>
+  // 页面加载时获取批次记录
+  window.onload = function () {
+    fetch('/farmer/getherbalrecords', {
+      method: 'GET'
+    })
+            .then(response => response.json())
+            .then(data => {
+              if (data.code === "20000") {
+                const records = data.records;
+                const tableBody = document.querySelector("#recordTable tbody");
+
+                // 清空表格
+                tableBody.innerHTML = "";
+
+                // 动态生成表格行
+                records.forEach(record => {
+                  const row = document.createElement("tr");
+
+                  row.innerHTML = `
+                    <td>${record.batchID}</td>
+                    <td>${record.cropType}</td>
+                    <td>${record.plantDate}</td>
+                    <td>${record.plantLocation}</td>
+                    <td>${record.transformherbal}</td>
+                    <td>${record.description}</td>
+                    <td><button onclick="deleteHerbal('${record.batchID}')">删除</button></td>
+                `;
+
+                  tableBody.appendChild(row);
+                });
+              } else {
+                alert("获取批次记录失败：" + data.msg);
+              }
+            })
+            .catch(error => console.error("获取批次记录时出错:", error));
+  };
+
+  // 删除批次记录
+  function deleteHerbal(batchID) {
+    if (confirm(`确认删除批次号为 ${batchID} 的记录吗？`)) {
+      fetch(`/farmer/deleteherbal/${batchID}`, {
+        method: 'DELETE',
+      })
+              .then(response => response.json())
+              .then(data => {
+                if (data.code === "20000") {
+                  alert("删除成功！");
+                  window.location.reload(); // 刷新页面
+                } else {
+                  alert("删除失败：" + data.msg);
+                }
+              })
+              .catch(error => console.error("删除批次记录时出错:", error));
+    }
+  }
+</script>
+</body>
+</html>

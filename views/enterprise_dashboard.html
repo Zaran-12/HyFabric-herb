@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业管理界面</title>
+    <link rel="stylesheet" href="/a/b/c/enterprise_dashboard.css">
+</head>
+<body>
+<!-- 导航栏 -->
+<nav>
+    <a href="enterprise_dashboard.html">上传批次</a>
+    <a href="manage_enterprise.html">管理批次</a>
+    <a href="person_enterprise.html">个人中心</a>
+    <a href="index.html">登录</a>
+    <a href="register.html">注册</a>
+</nav>
+
+<h1>企业管理界面</h1>
+<div class="container">
+    <!-- 上传批次信息 -->
+    <div class="form-group">
+        <h2>上传商品批次数据</h2>
+        <form id="uploadForm">
+            <label for="batchNo">批次号</label>
+            <input type="text" id="batchNo" placeholder="请输入批次号" required>
+
+            <label for="productName">商品名称</label>
+            <input type="text" id="productName" placeholder="请输入商品名称" required>
+
+            <label for="productionDate">生产日期</label>
+            <input type="date" id="productionDate" required>
+
+            <label for="location">生产地点</label>
+            <input type="text" id="location" placeholder="请输入生产地点" required>
+
+            <label for="transformGoods">商品运输物流信息记录：</label>
+            <input id="transformGoods" placeholder="请记录商品物流信息，包括运输方向，风控、温控等" required>
+
+            <label for="description">附加说明</label>
+            <textarea id="description" placeholder="请输入相关说明"></textarea>
+
+            <label for="uploadFile">上传质量检测文件</label>
+            <input type="file" id="uploadFile" accept="image/*,application/pdf">
+
+            <button type="submit">提交</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // 上传表单提交
+    document.getElementById("uploadForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append("batchNo", document.getElementById("batchNo").value);
+        formData.append("productName", document.getElementById("productName").value);
+        formData.append("productionDate", document.getElementById("productionDate").value);
+        formData.append("location", document.getElementById("location").value);
+        formData.append("transformGoods", document.getElementById("transformGoods").value);
+        formData.append("description", document.getElementById("description").value);
+        formData.append("uploadFile", document.getElementById("uploadFile").files[0]);
+
+        fetch('/enterprise/UploadGoodsData', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.code === "20000") {
+                    alert("批次数据上传成功！");
+                    window.location.href = "/enterprise_dashboard.html"
+                } else {
+                    alert("上传失败：" + data.msg);
+                }
+            })
+            .catch(error => console.error("上传时发生错误:", error));
+    });
+
+    
+</script>
+</body>
+</html>

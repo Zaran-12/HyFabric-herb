@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>导航栏示例</title>
+    <link rel="stylesheet" href="/a/b/c/home.css">
+</head>
+<body>
+<!-- 导航栏 -->
+<nav>
+    <a href="home.html" id="home">首页</a>
+    <a href="batch-query.html" id="batch-query">批次查询</a>
+    <a href="person.html" id="person">个人中心</a>
+    <a href="index.html" id="index">登录</a>
+    <a href="register.html" id="register">注册</a>
+</nav>
+
+<!--图片轮播-->
+<div class="news-container">
+    <!-- 左侧新闻板 -->
+    <div class="news-section left">
+        <h2>中医药材大事记</h2>
+        <div class="news-item">
+            <h3>药材质量标准提升</h3>
+            <p>国家对多种中药材质量标准进行了修订和提升，以确保药材质量。</p>
+        </div>
+        <div class="news-item">
+            <h3>中药产业发展会议</h3>
+            <p>在2023年，中药行业峰会重点讨论了产业发展的新方向。</p>
+        </div>
+        <div class="news-item">
+            <h3>中医药疫病防控中心成立</h3>
+            <p>中国中医科学院中药科技园青蒿素研究中心封顶暨中医药疫病防控中心揭牌仪式在京举行。</p>
+        </div>
+        <div class="news-item">
+            <h3>三级综合医院都要设中医科室</h3>
+            <p>鼓励有条件的三级综合医院设置中医二级学科或专业组。</p>
+        </div>
+    </div>
+
+    <!-- 中间轮播图 -->
+    <div class="carousel">
+        <div class="carousel-images">
+            <img src="/img/niuhuang.jpg" alt="中药材图片1">
+            <img src="/img/zhusha.jpg" alt="中药材图片2">
+            <img src="/img/renshen.jpg" alt="中药材图片3">
+        </div>
+        <button class="prev" onclick="prevSlide()">&#10094;</button>
+        <button class="next" onclick="nextSlide()">&#10095;</button>
+    </div>
+
+    <!-- 右侧新闻板 -->
+    <div class="news-section right">
+        <h2>中药材行业动态</h2>
+        <div class="news-item">
+            <h3>中药材出口增长</h3>
+            <p>2023年，我国中药材出口量创下新高，全球市场份额持续提升。</p>
+        </div>
+        <div class="news-item">
+            <h3>传统种植技术改进</h3>
+            <p>多地采用现代化技术种植中药材，提升了种植效率和品质。</p>
+        </div>
+        <div class="news-item">
+            <h3>政协双周会首次关注中医药话题</h3>
+            <p>强调坚持守正创新，遵循科学规律，协同做好中医药资源发掘和保护工作,推动中医药事业和产业高质量发展。</p>
+        </div>
+        <div class="news-item">
+            <h3>7省份获批国家中医药综合改革示范区</h3>
+            <p>首批获准建设国家中医药综合改革示范区，首批获准建设国家中医药综合改革示范区。</p>
+        </div>
+    </div>
+</div>
+
+
+<!--药材介绍-->
+<div class="herb-container">
+    <div class="herb-module">
+        <img src="/img/zhusha.jpg" alt="朱砂">
+        <div class="herb-info">
+            <h3>朱砂</h3>
+            <p><strong>生长地：</strong>常见于中国的贵州、湖南等地。</p>
+            <p><strong>习性：</strong>矿物类药材，主要存在于自然界的矿石中。</p>
+            <p><strong>作用：</strong>具有镇静安神、清心解毒的功效。</p>
+        </div>
+    </div>
+    <div class="herb-module">
+        <img src="/img/renshen.jpg" alt="人参">
+        <div class="herb-info">
+            <h3>人参</h3>
+            <p><strong>生长地：</strong>分布于中国东北地区及朝鲜半岛。</p>
+            <p><strong>习性：</strong>喜阴凉，适合在湿润、肥沃的土壤中生长。</p>
+            <p><strong>作用：</strong>补气益血，增强免疫力，抗疲劳。</p>
+        </div>
+    </div>
+    <div class="herb-module">
+        <img src="/img/niuhuang.jpg" alt="牛黄">
+        <div class="herb-info">
+            <h3>牛黄</h3>
+            <p><strong>生长地：</strong>来源于牛的胆结石，主要产于中国。</p>
+            <p><strong>习性：</strong>动物类药材，多见于养殖牛。</p>
+            <p><strong>作用：</strong>清热解毒，醒脑开窍，止惊安神。</p>
+        </div>
+    </div>
+    <div class="herb-module">
+        <img src="/img/fuling.jpg" alt="茯苓">
+        <div class="herb-info">
+            <h3>茯苓</h3>
+            <p><strong>生长地：</strong>主要产于中国的云南、贵州等地。</p>
+            <p><strong>习性：</strong>寄生于松树根部，喜湿润环境。</p>
+            <p><strong>作用：</strong>健脾利湿，宁心安神。</p>
+        </div>
+    </div>
+    <div class="herb-module">
+        <img src="/img/fushen.jpg" alt="茯神">
+        <div class="herb-info">
+            <h3>茯神</h3>
+            <p><strong>生长地：</strong>与茯苓相似，主要分布于松树根部。</p>
+            <p><strong>习性：</strong>湿润环境中生长，与茯苓共生。</p>
+            <p><strong>作用：</strong>宁心安神，利水消肿。</p>
+        </div>
+    </div>
+    <div class="herb-module">
+        <img src="/img/fuzi.jpg" alt="附子">
+        <div class="herb-info">
+            <h3>附子</h3>
+            <p><strong>生长地：</strong>主产于四川省。</p>
+            <p><strong>习性：</strong>喜湿润，耐寒冷，多生于山地。</p>
+            <p><strong>作用：</strong>温中散寒，回阳救逆。</p>
+        </div>
+    </div>
+    <div class="herb-module">
+        <img src="/img/chuanjiao.jpeg" alt="川椒">
+        <div class="herb-info">
+            <h3>川椒</h3>
+            <p><strong>生长地：</strong>四川、湖北等地广泛种植。</p>
+            <p><strong>习性：</strong>适宜温暖湿润气候，喜阳光。</p>
+            <p><strong>作用：</strong>温中散寒，止痛杀虫。</p>
+        </div>
+    </div>
+    <div class="herb-module">
+        <img src="/img/changshan.jpeg" alt="常山">
+        <div class="herb-info">
+            <h3>常山</h3>
+            <p><strong>生长地：</strong>分布于中国南方的山地。</p>
+            <p><strong>习性：</strong>喜湿润，耐阴，多生长于山林中。</p>
+            <p><strong>作用：</strong>祛痰止咳，截疟退热。</p>
+        </div>
+    </div>
+    <div class="herb-module">
+        <img src="/img/yuanzhi.jpeg" alt="远志">
+        <div class="herb-info">
+            <h3>远志</h3>
+            <p><strong>生长地：</strong>中国东北和华北地区。</p>
+            <p><strong>习性：</strong>耐寒，适合在沙质土壤中生长。</p>
+            <p><strong>作用：</strong>安神益智，祛痰止咳。</p>
+        </div>
+    </div>
+</div>
+
+
+<!-- 下方模块 -->
+<div class="footer-section">
+    <h2>中医药材最新资讯</h2>
+    <div class="footer-item">
+        <h3>药材价格波动</h3>
+        <p>近期，由于天气原因，多种中药材价格有所波动，需密切关注市场变化。</p>
+    </div>
+    <div class="footer-item">
+        <h3>合作伙伴扩展</h3>
+        <p>多家知名药企加入中药材溯源合作计划，共同推动行业透明化。</p>
+    </div>
+    <div class="footer-item">
+        <h3>国际市场布局</h3>
+        <p>中药材在海外市场需求大幅提升，多家企业扩大了国际业务布局。</p>
+    </div>
+</div>
+
+
+<!-- 页面内容 -->
+<div class="content">
+</div>
+
+<script>
+  // 动态设置当前页面对应的导航项为激活状态
+  const currentPath = window.location.pathname;
+  const navLinks = document.querySelectorAll("nav a");
+
+  navLinks.forEach(link => {
+    if (currentPath.includes(link.getAttribute("href"))) {
+      link.classList.add("active");
+    }
+  });
+  //轮播图
+  let currentIndex = 0;
+
+  function showSlide(index) {
+      const imagesContainer = document.querySelector('.carousel-images');
+      const totalSlides = document.querySelectorAll('.carousel-images img').length;
+
+      // Ensure the index is within bounds
+      if (index < 0) {
+          currentIndex = totalSlides - 1;
+      } else if (index >= totalSlides) {
+          currentIndex = 0;
+      } else {
+          currentIndex = index;
+      }
+
+      // Move the container to show the correct slide
+      const offset = -currentIndex * 100;
+      imagesContainer.style.transform = `translateX(${offset}%)`;
+  }
+
+  function nextSlide() {
+      showSlide(currentIndex + 1);
+  }
+
+  function prevSlide() {
+      showSlide(currentIndex - 1);
+  }
+
+  // Automatically change slides every 3 seconds
+  setInterval(() => {
+      nextSlide();
+  }, 3000);
+</script>
+</body>
+</html>

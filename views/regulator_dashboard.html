@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>监管机构管理界面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/a/b/c/regulator_dashboard.css">
+</head>
+<body>
+<!-- 导航栏 -->
+<nav>
+    <a href="regulator_dashboard.html">统计图表</a>
+    <a href="trace_regulator.html">追溯查询</a>
+    <a href="person_regulator.html">个人中心</a>
+    <a href="index.html">登录</a>
+    <a href="register.html">注册</a>
+</nav>
+
+<h1>监管机构管理界面</h1>
+<div class="container">
+
+    <!-- 统计图表容器 -->
+    <div class="chart-container">
+        <h2>供应链质量监控统计</h2>
+        <canvas id="statisticsChart"></canvas>
+    </div>
+
+    <!-- 表单：手动输入三个批次的数量 -->
+    <div class="form-group" style="margin-top: 20px;">
+        <h3>手动输入批次数量并更新图表</h3>
+        <form id="batchForm">
+            <label for="qualified">合格批次:</label>
+            <input type="number" id="qualified" value="120" style="width: 80px; margin-right: 10px;">
+
+            <label for="abnormal">异常批次:</label>
+            <input type="number" id="abnormal" value="15" style="width: 80px; margin-right: 10px;">
+
+            <label for="pending">待检测批次:</label>
+            <input type="number" id="pending" value="30" style="width: 80px; margin-right: 10px;">
+
+            <button type="submit" style="margin-left: 10px;">更新图表</button>
+        </form>
+    </div>
+
+</div>
+
+<!-- 引入 Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    let myChart = null;
+
+    // 初始化柱状图
+    function createChart(qualified, abnormal, pending) {
+        const ctx = document.getElementById('statisticsChart').getContext('2d');
+        myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['合格批次', '异常批次', '待检测批次'],
+                datasets: [{
+                    label: '批次数量',
+                    data: [qualified, abnormal, pending],
+                    backgroundColor: ['#4CAF50', '#FF5722', '#FFC107']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    title: { display: true, text: '中药材供应链质量监控统计' }
+                }
+            }
+        });
+    }
+
+    // 页面加载后先创建一个默认图表
+    window.onload = function() {
+        createChart(120, 15, 30); // 默认值
+    };
+
+    // 监听表单，更新图表
+    document.getElementById('batchForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // 获取输入的值
+        const qualified = Number(document.getElementById('qualified').value);
+        const abnormal = Number(document.getElementById('abnormal').value);
+        const pending = Number(document.getElementById('pending').value);
+
+        // 更新数据
+        myChart.data.datasets[0].data = [qualified, abnormal, pending];
+        myChart.update();
+    });
+
+    // 如果你有其他函数，如 loadExceptions()，可以保留或注释
+    // function loadExceptions() {
+    //     // ...
+    // }
+</script>
+</body>
+</html>

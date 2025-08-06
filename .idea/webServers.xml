@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="34bf452a-5dbb-450f-9323-6750dca270b6" name="SSH_VMware">
+        <fileTransfer rootFolder="/home/zjr" accessType="SFTP" host="192.168.154.129" port="22" sshConfigId="84b09fc2-b0bb-4f7e-b18d-b79671bc3a2c" sshConfig="zjr@192.168.154.129:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" isUseRsync="true" isUseSudo="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

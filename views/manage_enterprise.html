@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>企业管理界面</title>
+  <link rel="stylesheet" href="/a/b/c/enterprise_dashboard.css">
+</head>
+<body>
+<!-- 导航栏 -->
+<nav>
+  <a href="enterprise_dashboard.html">上传批次</a>
+  <a href="manage_enterprise.html">管理批次</a>
+  <a href="person_enterprise.html">个人中心</a>
+  <a href="index.html">登录</a>
+  <a href="register.html">注册</a>
+</nav>
+
+<h1>企业管理界面</h1>
+<!-- 管理批次记录 -->
+<div class="table-group">
+  <h2>管理批次记录</h2>
+  <table id="batchTable">
+    <thead>
+    <tr>
+      <th>批次号</th>
+      <th>商品名称</th>
+      <th>生产日期</th>
+      <th>生产地点</th>
+      <th>物流信息</th>
+      <th>附加说明</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 动态数据 -->
+    </tbody>
+  </table>
+</div>
+<script>
+  // 页面加载时获取批次记录
+  window.onload = function () {
+    fetch('/enterprise/getgoodsrecords', {
+      method: 'GET'
+    })
+            .then(response => response.json())
+            .then(data => {
+              if (data.code === "20000") {
+                const records = data.records;
+                const tableBody = document.querySelector("#batchTable tbody");
+
+                // 清空表格
+                tableBody.innerHTML = "";
+
+                // 动态生成表格行
+                records.forEach(record => {
+                  const row = document.createElement("tr");
+
+                  row.innerHTML = `
+                    <td>${record.batchID}</td>
+                    <td>${record.goodsType}</td>
+                    <td>${record.productionDate}</td>
+                    <td>${record.goodsLocation}</td>
+                    <td>${record.transformGoods}</td>
+                    <td>${record.description}</td>
+                    <td><button onclick="deleteGoods('${record.batchID}')">删除</button></td>
+                `;
+
+                  tableBody.appendChild(row);
+                });
+              } else {
+                alert("获取批次记录失败：" + data.msg);
+              }
+            })
+            .catch(error => console.error("获取批次记录时出错:", error));
+  };
+
+  // 删除批次记录
+  function deleteGoods(batchID) {
+    if (confirm(`确认删除批次号为 ${batchID} 的记录吗？`)) {
+      fetch(`/enterprise/deletegoods/${batchID}`, {
+        method: 'DELETE',
+      })
+              .then(response => response.json())
+              .then(data => {
+                if (data.code === "20000") {
+                  alert("删除成功！");
+                  window.location.reload(); // 刷新页面
+                } else {
+                  alert("删除失败：" + data.msg);
+                }
+              })
+              .catch(error => console.error("删除批次记录时出错:", error));
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+/* 导航栏样式 */
+nav {
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(
+            to right,
+            rgba(34, 139, 34, 0.3),  /* 森林绿 */
+            rgba(34, 139, 34, 0.5),  /* 森林绿 */
+            rgba(34, 139, 34, 0.3) /* 森林绿 */
+    );
+    padding: 15px 20px;
+    border-radius: 30px;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-family: "Al Tarikh", "Arial", sans-serif;
+}
+
+/* 鼠标悬停效果 */
+nav a:hover {
+    background-color: rgba(34, 139, 34, 0.6);
+}
+
+/* 激活状态样式 */
+nav a.active {
+    background-color: rgba(34, 139, 34, 0.2);
+    font-weight: bold;
+}
+
+/* 页面内容样式 */
+.content {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+}
+/* 总容器 */
+.news-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 20px auto;
+    max-width: 1200px;
+    gap: 20px; /* 两侧新闻和中间轮播图的间距 */
+}
+
+/* 左右新闻板 */
+.news-section {
+    width: 25%; /* 占总宽度的25% */
+    background-color: #f9f9f9; /* 浅灰色背景 */
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 阴影 */
+}
+
+.news-section h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.news-item {
+    margin-bottom: 15px;
+}
+
+.news-item h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #005500; /* 深绿色 */
+}
+
+.news-item p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+}
+/*轮播图*/
+/* Carousel container */
+.carousel {
+    position: relative;
+    max-width: 600px; /* 设置最大宽度 */
+    margin: auto;
+    overflow: hidden;
+    border-radius: 60px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Images container */
+.carousel-images {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Images */
+.carousel-images img {
+    width: 100%;
+    flex-shrink: 0;
+}
+
+/* Navigation buttons */
+button.prev, button.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+button.prev {
+    left: 10px;
+}
+
+button.next {
+    right: 10px;
+}
+
+button.prev:hover, button.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+
+/*药材介绍*/
+.herb-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 80px;
+    justify-content: center;
+    margin: 20px auto;
+    max-width: 1200px;
+}
+
+.herb-module {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+}
+
+.herb-module img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.herb-info h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #005500;
+    margin-bottom: 10px;
+}
+
+.herb-info p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+
+/* 下方模块 */
+.footer-section {
+    width: 100%;
+    background-color: #eef9ee; /* 浅绿色背景 */
+    padding: 20px;
+    margin-top: 40px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.footer-section h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #005500; /* 深绿色 */
+}
+
+.footer-item {
+    margin-bottom: 15px;
+}
+
+.footer-item h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.footer-item p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+}

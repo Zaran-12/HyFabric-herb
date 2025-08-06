@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>注册页面</title>
+  <link rel="stylesheet" href="/a/b/c/styles.css">
+</head>
+<body>
+<div class="login-container">
+  <h2>注册</h2>
+  <form id="loginForm">
+    <div>
+      <label for="avatar">上传头像：</label>
+      <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" required>
+      <button type="button" id="upload-btn">上传头像</button>
+      <div id="preview-container">
+        <img id="avatar-preview" src="" alt="头像预览" style="width: 150px; height: 150px; border-radius: 50%; display: none;">
+      </div>
+    </div>
+
+    <label for="username">用户名:</label>
+    <input type="text" class="username" id="username" name="username" required><br><br>
+
+    <label for="password">密码:</label>
+    <input type="password" id="password" name="password" required><br><br>
+
+    <label for="password">确认密码:</label>
+    <input type="password" id="repeatpwd" name="repeatpwd" required><br><br>
+
+    <label for="password" >选择角色：</label>
+    <select id="role" name="role" >
+      <option value="农户">农户</option>
+      <option value="用户">用户</option>
+      <option value="企业">企业</option>
+      <option value="监管机构">监管机构</option>
+    </select><br><br>
+
+    <input type="submit" value="注册">
+  </form>
+</div>
+
+<script src="../asset/js/register.js"></script>
+</body>
+</html>

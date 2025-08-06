@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>农户管理界面</title>
+    <link rel="stylesheet" href="/a/b/c/farmer_dashboard.css">
+</head>
+<body>
+<!-- 导航栏 -->
+<nav>
+    <a href="farmer_dashboard.html">上传批次</a>
+    <a href="records_farmer.html">查看记录</a>
+    <a href="person_farmer.html" id="person">个人中心</a>
+    <a href="index.html">登录</a>
+    <a href="register.html">注册</a>
+</nav>
+
+<h1>农户管理界面</h1>
+<div class="container">
+    <!-- 上传批次信息 -->
+    <div class="form-group">
+        <h2>上传中药材批次数据</h2>
+        <form id="uploadForm">
+            <label for="batchNo">批次号</label>
+            <input type="text" id="batchNo" placeholder="请输入批次号" required>
+            <div>
+                <label for="cropType">中药材种类</label>
+                <input list="cropTypes" id="cropType" placeholder="请选择或输入中药材种类" required>
+                <datalist id="cropTypes">
+                    <option value="人参"></option>
+                    <option value="甘草"></option>
+                    <option value="当归"></option>
+                </datalist>
+            </div>
+
+            <label for="plantDate">种植时间</label>
+            <input type="date" id="plantDate" required>
+
+            <label for="location">种植地点</label>
+            <input type="text" id="location" placeholder="请输入种植地点" required>
+
+            <label for="transformHerbal">中药材物流信息记录</label>
+            <input type="text" id="transformHerbal" placeholder="请记录药品物流信息，包括运输方向，风控、温控等" required>
+
+            <label for="description">附加说明</label>
+            <textarea id="description" placeholder="请输入相关说明"></textarea>
+
+            <label for="uploadFile">上传质量检测文件</label>
+            <input type="file" id="uploadFile" accept="image/*,application/pdf">
+
+            <button type="submit">提交</button>
+        </form>
+    </div>
+
+</div>
+
+<script>
+    // 上传表单提交
+    document.getElementById("uploadForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append("batchNo", document.getElementById("batchNo").value);
+        formData.append("cropType", document.getElementById("cropType").value);
+        formData.append("plantDate", document.getElementById("plantDate").value);
+        formData.append("location", document.getElementById("location").value);
+        formData.append("transformHerbal", document.getElementById("transformHerbal").value);
+        formData.append("description", document.getElementById("description").value);
+        formData.append("uploadFile", document.getElementById("uploadFile").files[0]);
+        for (let pair of formData.entries()) {
+            console.log(pair[0] + ': ' + pair[1]);
+        }
+
+        fetch('/farmer/UploadBatchData', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.code === "20000") {
+                    alert("批次信息上传成功！");
+                    window.location.href = "/farmer_dashboard.html";
+                } else {
+                    alert("上传失败：" + data.msg);
+                }
+            })
+            .catch(error => console.error("上传时发生错误:", error));
+    });
+
+
+</script>
+</body>
+</html>

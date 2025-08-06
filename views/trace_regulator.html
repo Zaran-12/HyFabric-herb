@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>监管机构管理界面</title>
+    <link rel="stylesheet" href="/a/b/c/regulator_dashboard.css">
+</head>
+<body>
+<!-- 导航栏 -->
+<nav>
+    <a href="regulator_dashboard.html">统计图表</a>
+    <a href="trace_regulator.html">追溯查询</a>
+    <a href="person_regulator.html">个人中心</a>
+    <a href="index.html">登录</a>
+    <a href="register.html">注册</a>
+</nav>
+
+<h1>监管机构管理界面</h1>
+<!-- 实时追溯数据 -->
+<div class="form-group">
+    <h2>实时追溯数据查询</h2>
+    <form id="traceForm">
+        <label for="batchNo">输入批次号</label>
+        <input type="text" id="batchNo" placeholder="请输入批次号查询" required>
+        <button type="submit">查询</button>
+    </form>
+</div>
+
+<!-- 查询结果显示 -->
+<div id="traceResult" style="display:none;">
+    <h3>查询结果：</h3>
+    <pre id="herbalData"></pre>
+    <pre id="goodsData"></pre>
+</div>
+
+<script>
+    document.getElementById("traceForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const batchNo = document.getElementById("batchNo").value;
+
+        // <-- 修改：假设监管端路由改为 /regulator/combinedTrace
+        fetch(`/regulator/combinedTrace?batchNo=${batchNo}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.code === "20000") {
+                    // 显示结果区域
+                    document.getElementById("traceResult").style.display = "block";
+
+                    // 分别获取草药和商品信息
+                    const herbal = data.data?.herbal || "暂无草药数据";
+                    const goods  = data.data?.goods  || "暂无商品数据";
+
+                    document.getElementById("herbalData").innerText =
+                        "【草药链码信息】\n" + JSON.stringify(herbal, null, 2);
+
+                    document.getElementById("goodsData").innerText  =
+                        "【商品链码信息】\n" + JSON.stringify(goods, null, 2);
+                } else {
+                    alert("查询失败：" + data.msg);
+                }
+            })
+            .catch(error => console.error("追溯查询时发生错误:", error));
+    });
+
+    // 如果你有一些函数需要在页面加载时调用，可以保留
+    function loadStatisticsChart() {
+        // ...
+    }
+    function loadExceptions() {
+        // ...
+    }
+    // 初始化加载
+    loadStatisticsChart();
+    loadExceptions();
+</script>
+</body>
+</html>
